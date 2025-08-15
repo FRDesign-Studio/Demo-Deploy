@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FR Designs</title>
+    <link rel="icon" type="image/png" href="assets/Screenshot 2025-08-04 at 8.49.43 PM.png">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Custom styles for the video overlay */
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 80vh; /* Adjust height as needed */
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Styles for the iframe video background */
+        .video-container video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            color: white;
+            z-index: 10;
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay to ensure text is readable */
+        }
+
+        /* Custom modal for displaying messages */
+        #custom-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            background-color: white;
+            color: #1A2430;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            max-width: 90%;
+            display: none;
+            text-align: center;
+        }
+
+        /* Animation for About page */
+        .slide-in {
+            animation: slideInFromTop 0.8s ease-in-out;
+        }
+
+        @keyframes slideInFromTop {
+            0% {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Lightbox styles */
+        .lightbox-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .lightbox-overlay.visible {
+            opacity: 1;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .lightbox-image {
+            display: block;
+            max-width: 100%;
+            max-height: 100vh;
+            border-radius: 0.5rem;
+            object-fit: contain;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 1rem;
+            right: 2rem;
+            font-size: 2rem;
+            color: white;
+            cursor: pointer;
+            z-index: 2001;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .lightbox-close:hover {
+            color: #ccc;
+        }
+        .font-montserrat 
+        {
+            font-family: 'Montserrat', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <div id="custom-modal" class="rounded-lg shadow-lg">
+        <p id="modal-message" class="text-lg mb-4"></p>
+        <button id="modal-close-btn" class="bg-blue-600 text-white p-2 px-4 rounded-lg font-semibold hover:bg-blue-700 transition duration-300">
+            Close
+        </button>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox-overlay" class="lightbox-overlay" onclick="closeLightbox()">
+        <div class="lightbox-content">
+            <span id="lightbox-close" class="lightbox-close" onclick="closeLightbox(event)">&times;</span>
+            <img id="lightbox-image" class="lightbox-image" src="" alt="">
+        </div>
+    </div>
+
+
+    <main>
+        <!-- Home Page Section -->
+        <div id="home-page">
+            <section id="hero" class="video-container">
+                <video
+                    class="absolute top-1/2 left-1/2 min-w-full min-h-full w-auto h-auto -translate-x-1/2 -translate-y-1/2"
+                    src="assets/VN20250814_185202.mp4"
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                ></video>
+
+                <div class="video-overlay">
+                    <!-- Logo in the top-left, also acts as a Home button -->
+                    <div class="absolute top-4 left-4 z-20">
+                         <button onclick="showPage('home-page')" class="p-1 rounded-full hover:bg-white hover:bg-opacity-20 transition duration-300">
+                            <img src="assets/Logo.png" alt="FR Designs Logo" class="w-12 h-12 rounded-full">
+                        </button>
+                    </div>
+                    
+                    <!-- About hyperlink in the top-right -->
+                    <div class="absolute top-4 right-4 z-20">
+                       <!--  <a href="#" onclick="showPage('about-page'); return false;" class="text-white font-bold text-6xl hover:text-blue-300 transition duration-300"></a>
+                            About
+                        </a> -->
+                        <a href="#" onclick="showPage('about-page'); return false;" class="text-white font-black text-2xl hover:text-blue-300 transition duration-300">
+                            About
+                        </a>
+                    </div>
+                    
+                    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+                    
+                    <h1 class="text-xl md:text-2xl font-bold mb-4 font-montserrat">FR Design Studio</h1>
+                    <p class="text-3xl md:text-4xl max-w-2xl px-4 mb-8 font-montserrat">
+                       "Where elegance is effortless and art is affordable."
+                    </p>
+                   <!--  <button onclick="showPage('projects-page')" class="bg-transparent bg-opacity-20 hover:bg-opacity-30 transition duration-300 text-white font-semibold py-3 px-8 rounded-full shadow-lg border-2 border-white backdrop-blur-sm">
+                        View Projects
+                    </button> -->
+                </div>
+            </section>
+
+            <section id="services" class="container mx-auto px-4 py-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Our Packages</h2>
+                <div class="flex flex-col gap-12">
+                    <!-- Standard Package -->
+                    <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-blue-500 flex flex-col md:flex-row items-center justify-between text-center md:text-left">
+                        <img onclick="showLightbox(this.src, this.alt)" src="assets/standardPackage/Screenshot_20250814_210729_Doc Scanner (2).jpg" alt="Standard Package Image" class="w-full md:w-1/2 h-auto rounded-lg mb-4 md:mb-0 cursor-pointer">
+                        <div class="md:w-1/2 md:pl-8">
+                            <h3 class="text-xl font-bold">Standard Package </h3>
+                            <h4 class ="text-md font-semibold text-blue-600 mb-2">Starts at ₹5,00,000</h4>
+                            <p class="text-sm text-gray-600">Our Standard Package is built around the essential, smart, functional, and thoughtful design. It brings you affordability without sacrificing quality and looks. Ideal for homeowners who want simplicity.</p>
+                        </div>
+                    </div>
+                    <!-- Premium Package -->
+                    <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-blue-500 flex flex-col md:flex-row items-center justify-between text-center md:text-left">
+                        <img onclick="showLightbox(this.src, this.alt)" src="assets/premiumPackage/Screenshot_20250814_210732_Doc Scanner (1).jpg" alt="Premium Package Image" class="w-full md:w-1/2 h-auto rounded-lg mb-4 md:mb-0 cursor-pointer">
+                        <div class="md:w-1/2 md:pl-8">
+                            <h3 class="text-xl font-bold">Premium package</h3>
+                            <h4 class ="text-md font-semibold text-blue-600 mb-2">Starts at ₹8,00,000</h4>
+                            <p class="text-sm text-gray-600">Designed for those who desire more than just interiors - our Premium Package blends elegance with bold styles. Every detail is tailored to your taste. Experience a home that doesn't just look premium - it feels like it.</p>
+                        </div>
+                    </div>
+                    <!-- Luxury Package -->
+                    <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-blue-500 flex flex-col md:flex-row items-center justify-between text-center md:text-left">
+                        <img onclick="showLightbox(this.src, this.alt)" src="assets/luxuryPackage/Screenshot_20250814_210736_Doc Scanner (1).jpg" alt="Luxury Package Image" class="w-full md:w-1/2 h-auto rounded-lg mb-4 md:mb-0 cursor-pointer">
+                        <div class="md:w-1/2 md:pl-8">
+                            <h3 class="text-xl font-bold">Luxury package</h3>
+                            <h4 class ="text-md font-semibold text-blue-600 mb-2">Starts at ₹10,00,000</h4>
+                            <p class="text-sm text-gray-600">Our Luxury Package is crafted for those who seek unmatched elegance, superior materials and flawless design. It's the ultimate blend of comfort, class, and curated luxury.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="reviews" class="bg-gray-100 container mx-auto px-4 py-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Client Reviews</h2>
+
+                <!-- Client Review 1 with Photo Slide -->
+                <div class="mb-16">
+                    <div class="bg-white p-8 rounded-lg shadow-xl mb-8">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <img src="https://placehold.co/60x60/F1F5F9/1F2937?text=MS" alt=" profile picture" class="rounded-full">
+                            <div>
+                                <p class="font-semibold text-lg">Muzzammil Shaikh, Valpoi-Goa </p>
+                            </div>
+                        </div>
+                        
+                        <p class="text-gray-700 italic">"recently had pleasure working with fr
+                            studio for my room interior design, and
+                            couldn't be happier with the results!
+                            From the initial consultation to the final
+                            touches, their team was incredibly creative."
+                        </p>
+                    </div>
+                    <!-- Photo slide for the first review -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                        <img onclick="showLightbox(this.src, this.alt)" src="assets/customer1/1000025284.jpg" alt="Project 1 Photo A" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
+                        <img onclick="showLightbox(this.src, this.alt)" src="assets/customer1/1000025363.jpg" alt="Project 1 Photo B" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
+                        <img onclick="showLightbox(this.src, this.alt)" src="assets/customer1/1000025371.jpg" alt="Project 1 Photo C" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
+                        <img onclick="showLightbox(this.src, this.alt)" src="assets/customer1/1000025386.jpg" alt="Project 1 Photo D" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
+                        <img onclick="showLightbox(this.src, this.alt)" src="https://placehold.co/400x400/808080/FFFFFF?text=to be added" alt="Project 1 Photo E to be added" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105 hidden lg:block">
+                    </div>
+                </div>
+
+                <!-- Client Review 2 with Photo Slide -->
+                <div class="mb-16">
+                    <div class="bg-white p-8 rounded-lg shadow-xl mb-8">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <img src="https://placehold.co/60x60/F1F5F9/1F2937?text=SP" alt="profile picture" class="rounded-full">
+                            <div>
+                                <p class="font-semibold text-lg">Shailesh Prabhu, Porvorim-Goa </p>
+                               
+                            </div>
+                        </div>
+                     
+                        <p class="text-gray-700 italic">"FR Design Studio transformed our 2 BHK into a stylish, functional, and comfortable home that perfectly reflects our taste. The team understood our vision from day one, suggested creative ideas within our budget, we couldn't be happier with the result!"</p>
+                    </div>
+                    <!-- Photo slide for the second review -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                        <img onclick="showLightbox(this.src, this.alt)" src="assets/customer2/1000020738.jpg" alt="Project 2 Photo A" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
+                        <img onclick="showLightbox(this.src, this.alt)" src="assets/customer2/1000029033.jpg" alt="Project 2 Photo B" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
+                        <img onclick="showLightbox(this.src, this.alt)" src="assets/customer2/1000029173.jpg" alt="Project 2 Photo C" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
+                        <img onclick="showLightbox(this.src, this.alt)" src="assets/customer2/1000029174.jpg" alt="Project 2 Photo D" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
+                        <img onclick="showLightbox(this.src, this.alt)" src="https://placehold.co/400x400/909090/FFFFFF?text=Project+2+Photo+E" alt="Project 2 Photo E" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105 hidden lg:block">
+                    </div>
+                </div>
+
+                <!-- Client Review 3 with Photo Slide -->
+                <div class="mb-16">
+                    <div class="bg-white p-8 rounded-lg shadow-xl mb-8">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <img src="https://placehold.co/60x60/F1F5F9/1F2937?text=SS" alt="Liam Anderson profile picture" class="rounded-full">
+                            <div>
+                                <p class="font-semibold text-lg">Shaibaz Shaikh, Ponda-Goa</p>
+
+                            </div>
+                        </div>
+
+                        <p class="text-gray-700 italic">"FR Design Studio did an exceptional job with our 2 BHK interiors, turning every corner into something beautiful and practical. They blended modern design with smart space planning, making our home feel bigger and more welcoming. The quality of materials, finishing, and their professionalism throughout the project truly impressed us—we’re thrilled with our new home!"</p>
+                    </div>
+                    <!-- Photo slide for the third review -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                        <img onclick="showLightbox(this.src, this.alt)" src="assets/customer3/1000042755.jpg" alt="Project 3 Photo A" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
+                        <img onclick="showLightbox(this.src, this.alt)" src="assets/customer3/1000042756.jpg" alt="Project 3 Photo B" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
+                        <img onclick="showLightbox(this.src, this.alt)" src="assets/customer3/1000042762.jpg" alt="Project 3 Photo C" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
+                        <img onclick="showLightbox(this.src, this.alt)" src="assets/customer3/1000042781.jpg" alt="Project 3 Photo D" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
+                        <img onclick="showLightbox(this.src, this.alt)" src="https://placehold.co/400x400/A0A0A0/FFFFFF?text=To be added" alt="Project 3 Photo E" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105 hidden lg:block">
+                    </div>
+                </div>
+
+                <!-- Client Review 4 with Photo Slide -->
+                <div class="mb-16">
+                    <div class="bg-white p-8 rounded-lg shadow-xl mb-8">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <img src="https://placehold.co/60x60/F1F5F9/1F2937?text=RK" alt="profile picture" class="rounded-full">
+                            <div>
+                                <p class="font-semibold text-lg">Rajesh Kumar, Ponda-Goa</p>
+
+                            </div>
+                        </div>
+                      
+                        <p class="text-gray-700 italic">"FR Design Studio did a wonderful job on our 3 BHK bungalow, delivering designs that matched our style and needs perfectly. The team maintained great communication throughout, kept us informed at every stage, and ensured a smooth, satisfactory experience from start to finish."</p>
+                    </div>
+                    <!-- Photo slide for the fourth review -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                        <img onclick="showLightbox(this.src, this.alt)" src="assets/customer4/1000071699.jpg" alt="Project 4 Photo A" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
+                        <img onclick="showLightbox(this.src, this.alt)" src="assets/customer4/1000071783.jpg" alt="Project 4 Photo B" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
+                        <img onclick="showLightbox(this.src, this.alt)" src="assets/customer4/1000071805.jpg" alt="Project 4 Photo C" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
+                        <img onclick="showLightbox(this.src, this.alt)" src="assets/customer4/1000071852.jpg" alt="Project 4 Photo D" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
+                        <img onclick="showLightbox(this.src, this.alt)" src="assets/customer4/1000071998.jpg" alt="Project 4 Photo E" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105 hidden lg:block">
+                    </div>
+                </div>
+
+                <!-- Client Review 5 with Photo Slide -->
+                <div class="mb-16">
+                    <div class="bg-white p-8 rounded-lg shadow-xl mb-8">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <img src="https://placehold.co/60x60/F1F5F9/1F2937?text=SM" alt="profile picture" class="rounded-full">
+                            <div>
+                                <p class="font-semibold text-lg">Satish Mandrekar [Mandrekar Fitness World]</p>
+                            </div>
+                        </div>
+                       
+                        <p></p>
+                    </div>
+                    <!-- Photo slide for the fifth review -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                        <img onclick="showLightbox(this.src, this.alt)" src="assets/customer5/1000014608.jpg" alt="Project 5 Photo A" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
+                        <img onclick="showLightbox(this.src, this.alt)" src="assets/customer5/1000014614.jpg" alt="Project 5 Photo B" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
+                        <img onclick="showLightbox(this.src, this.alt)" src="assets/customer5/1000014617.jpg" alt="Project 5 Photo C" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
+                        <img onclick="showLightbox(this.src, this.alt)" src="assets/customer5/1000014620.jpg" alt="Project 5 Photo D" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
+                        <img onclick="showLightbox(this.src, this.alt)" src="assets/customer5/" alt="Project 5 Photo E" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105 hidden lg:block">
+                    </div>
+                </div>
+
+               
+            </section>
+
+            <!-- Additional Services Section -->
+            <section id="additional-services" class="container mx-auto px-4 py-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-8">Additional Services</h2>
+                <p class="text-xl md:text-2xl text-center mb-12 text-gray-700">We provide 3D Design Services</p>
+                
+                <!-- 3D Design Images -->
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4">
+                    <img onclick="showLightbox(this.src, this.alt)" src="assets/3dservices/1000074845.jpg" alt="3D Design Image 1" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
+                    <img onclick="showLightbox(this.src, this.alt)" src="assets/3dservices/1000074713.png" alt="3D Design Image 2" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
+                    <img onclick="showLightbox(this.src, this.alt)" src="assets/3dservices/1000074857.jpg" alt="3D Design Image 3" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
+                    <img onclick="showLightbox(this.src, this.alt)" src="assets/3dservices/3A.png" alt="3D Design Image 4" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
+                </div>
+            </section>
+
+
+            <!-- New section to replace "Quick facts" -->
+            <section id="contact-info" class="bg-[#001f4c] text-white py-16">
+                <div class="container mx-auto px-4">
+                    <div class="flex flex-col md:flex-row items-center md:space-x-8">
+                        <!-- Square image on the left -->
+                        <div class="w-full md:w-1/2 mb-8 md:mb-0">
+                            <div class="aspect-w-1 aspect-h-1">
+                                <img src="assets/Office/424918710_18322035658191065_8523839892679871398_n (1).jpg" alt="FR Design Studio" class="rounded-lg shadow-xl w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <!-- Title, description, and links on the right -->
+                        <div class="md:w-1/2 text-center md:text-left">
+                            <h2 class="text-3xl md:text-4xl font-bold mb-4">The FR Design Studio</h2>
+                            <p class="text-lg text-gray-200 mb-6">
+                                We are a creative firm specializing in merging creativity with practical execution in architectural and interior design. We work closely with our clients to deliver timeless designs and spaces with impeccable style and sophistication.
+                            </p>
+                            <div class="flex flex-col sm:flex-row items-center justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-8">
+                                <!-- Instagram Link -->
+                                <a href="https://www.instagram.com/the.fr_design.studio/" target="_blank" class="flex items-center space-x-2 text-white hover:text-blue-300 transition-colors duration-300">
+                                    <i class="fab fa-instagram text-2xl"></i>
+                                    <span>The FR Design Studio</span>
+                                </a>
+                                <!-- Phone Number -->
+                                <a href="tel:+919876543210" class="flex items-center space-x-2 text-white hover:text-blue-300 transition-colors duration-300">
+                                    <i class="fas fa-phone text-2xl"></i>
+                                    <span>+91 8766537048</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- About Page Section -->
+        <div id="about-page" class="hidden">
+            <!-- Header for About page -->
+            <div class="absolute top-0 left-0 right-0 p-4 flex items-center justify-between z-20">
+                <!-- Logo button on the left -->
+                <button onclick="showPage('home-page')" class="p-1 rounded-full hover:bg-gray-200 transition duration-300">
+                    <img src="assets/Screenshot 2025-08-04 at 8.49.43 PM.png" alt="FR Designs Logo" class="w-12 h-12 rounded-full">
+                </button>
+                <!-- Home button on the right -->
+                <button onclick="showPage('home-page')" class="text-2xl font-semibold text-gray-800 hover:text-blue-600 transition duration-300">
+                    Home
+                </button>
+            </div>
+            
+            <section class="container mx-auto px-4 py-16 mt-20 slide-in">
+                <div class="flex flex-col md:flex-row items-center justify-center md:space-x-8">
+                    <div class="md:w-1/2 mb-8 md:mb-0">
+                        <img src="assets/Screenshot 2025-08-08 at 6.41.07 PM.png" alt="Rishan Khan" class="rounded-lg shadow-xl w-full h-auto">
+                    </div>
+                    <div class="md:w-1/2 text-center md:text-left">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-4">About FR Designs</h2>
+                        <h3 class="text-2xl font-semibold mb-4">Rishan Khan - Founder</h3>
+                        <p class="text-lg text-gray-700 leading-relaxed">
+                            Rishan Khan is a civil engineer and interior designer based in Goa. He is the founder of THE FR DESIGN STUDIO, a firm specializing in merging creativity with practical execution in architectural and interior design.
+                            The studio has successfully completed over 50 projects across various Goan locations like Panjim, Porvorim, Margao, Sanklim, and Bicholim.
+                            The FR Design Studio is a brand that goes beyond interior design and takes on a unique and creative approach to every single project with a deep understanding of its purpose, and the people using it. The studio works closely with clients to deliver timeless design and spaces with impeccable style and sophistication.
+                        </p>
+                        <!-- Added Instagram and Phone number links -->
+                        <div class="flex flex-col sm:flex-row items-center justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-8 mt-6">
+                                <!-- Instagram Link -->
+                                <a href="https://www.instagram.com/the.fr_design.studio/" target="_blank" class="flex items-center space-x-2 text-gray-700 hover:text-blue-600 transition-colors duration-300">
+                                    <i class="fab fa-instagram text-2xl"></i>
+                                    <span>The FR Design Studio</span>
+                                </a>
+                                <!-- Phone Number -->
+                                <a href="tel:+919876543210" class="flex items-center space-x-2 text-gray-700 hover:text-blue-600 transition-colors duration-300">
+                                    <i class="fas fa-phone text-2xl"></i>
+                                    <span>+91 8766537048</span>
+                                </a>
+                            </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <div class="flex justify-center space-x-6 mb-4">
+                <a href="https://www.instagram.com/rzk9000" target="_blank" class="text-gray-400 hover:text-white transition-colors duration-300">
+                    <i class="fab fa-instagram text-2xl"></i>
+                </a>
+                <a href="mailto:ka13khan@gmail.com" class="text-gray-400 hover:text-white transition-colors duration-300">
+                    <i class="fas fa-envelope text-2xl"></i>
+                </a>
+            </div>
+            <p class="text-gray-400 text-sm">&copy; 2025 Khizer Ahmed Khan. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div class="fixed bottom-6 right-6 z-50">
+        <a href="https://form.typeform.com/to/QmOxx0VZ" target="_blank" class="bg-blue-600 text-white font-semibold w-28 h-28 rounded-full shadow-lg hover:bg-blue-700 transition duration-300 flex flex-col items-center justify-center text-lg">
+            Let's<br>begin
+        </a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const pages = ['home-page', 'projects-page', 'about-page'];
+            const homePage = document.getElementById('home-page');
+            const projectsPage = document.getElementById('projects-page');
+            const aboutPage = document.getElementById('about-page');
+            const customModal = document.getElementById('custom-modal');
+            const modalMessage = document.getElementById('modal-message');
+            const modalCloseBtn = document.getElementById('modal-close-btn');
+            const lightboxOverlay = document.getElementById('lightbox-overlay');
+            const lightboxImage = document.getElementById('lightbox-image');
+
+            // Function to show a specific page and hide others
+            window.showPage = function(pageId) {
+                pages.forEach(id => {
+                    const page = document.getElementById(id);
+                    if (page) {
+                        page.classList.add('hidden');
+                        page.classList.remove('slide-in');
+                    }
+                });
+                const targetPage = document.getElementById(pageId);
+                if (targetPage) {
+                    targetPage.classList.remove('hidden');
+                    if (pageId === 'about-page') {
+                        targetPage.classList.add('slide-in');
+                    }
+                }
+            };
+            
+            // Function to show custom modal with a message
+            window.showMessage = function(message) {
+                modalMessage.textContent = message;
+                customModal.style.display = 'block';
+            };
+
+            // Close the custom modal
+            if (modalCloseBtn) {
+                modalCloseBtn.addEventListener('click', () => {
+                    customModal.style.display = 'none';
+                });
+            }
+
+            // Show lightbox with the clicked image
+            window.showLightbox = function(imageSrc, imageAlt) {
+                lightboxImage.src = imageSrc;
+                lightboxImage.alt = imageAlt;
+                lightboxOverlay.style.display = 'flex';
+                // Trigger the fade-in animation
+                setTimeout(() => {
+                    lightboxOverlay.classList.add('visible');
+                }, 10); // Small delay to ensure display is set before adding class
+            };
+
+            // Close the lightbox
+            window.closeLightbox = function(event) {
+                // Prevent closing when clicking the image itself
+                if (event && event.target.id === 'lightbox-image') {
+                    return;
+                }
+                lightboxOverlay.classList.remove('visible');
+                setTimeout(() => {
+                    lightboxOverlay.style.display = 'none';
+                    lightboxImage.src = '';
+                    lightboxImage.alt = '';
+                }, 300); // Wait for the fade-out transition to complete
+            };
+
+            // Initial page load
+            showPage('home-page');
+        });
+    </script>
+</body>
+</html>
