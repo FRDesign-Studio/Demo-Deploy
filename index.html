@@ -142,6 +142,19 @@
         {
             font-family: 'Montserrat', sans-serif;
         }
+
+        /* Custom aspect ratio for vertical video (9:16) */
+        .aspect-9-16 {
+            padding-bottom: 177.77%; /* (16 / 9) * 100% */
+            position: relative;
+        }
+        .aspect-9-16 > iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -168,7 +181,7 @@
             <section id="hero" class="video-container">
                 <video
                     class="absolute top-1/2 left-1/2 min-w-full min-h-full w-auto h-auto -translate-x-1/2 -translate-y-1/2"
-                    src="assets/VN20250814_185202.mp4"
+                    src="assets/video.mp4"
                     autoplay
                     muted
                     loop
@@ -259,12 +272,12 @@
                         </p>
                     </div>
                     <!-- Photo slide for the first review -->
-                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4">
                         <img onclick="showLightbox(this.src, this.alt)" src="assets/customer1/1000025284.jpg" alt="Project 1 Photo A" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
                         <img onclick="showLightbox(this.src, this.alt)" src="assets/customer1/1000025363.jpg" alt="Project 1 Photo B" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
                         <img onclick="showLightbox(this.src, this.alt)" src="assets/customer1/1000025371.jpg" alt="Project 1 Photo C" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
                         <img onclick="showLightbox(this.src, this.alt)" src="assets/customer1/1000025386.jpg" alt="Project 1 Photo D" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
-                        <img onclick="showLightbox(this.src, this.alt)" src="https://placehold.co/400x400/808080/FFFFFF?text=to be added" alt="Project 1 Photo E to be added" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105 hidden lg:block">
+
                     </div>
                 </div>
 
@@ -282,12 +295,12 @@
                         <p class="text-gray-700 italic">"FR Design Studio transformed our 2 BHK into a stylish, functional, and comfortable home that perfectly reflects our taste. The team understood our vision from day one, suggested creative ideas within our budget, we couldn't be happier with the result!"</p>
                     </div>
                     <!-- Photo slide for the second review -->
-                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4">
                         <img onclick="showLightbox(this.src, this.alt)" src="assets/customer2/1000020738.jpg" alt="Project 2 Photo A" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
                         <img onclick="showLightbox(this.src, this.alt)" src="assets/customer2/1000029033.jpg" alt="Project 2 Photo B" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
                         <img onclick="showLightbox(this.src, this.alt)" src="assets/customer2/1000029173.jpg" alt="Project 2 Photo C" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
                         <img onclick="showLightbox(this.src, this.alt)" src="assets/customer2/1000029174.jpg" alt="Project 2 Photo D" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
-                        <img onclick="showLightbox(this.src, this.alt)" src="https://placehold.co/400x400/909090/FFFFFF?text=Project+2+Photo+E" alt="Project 2 Photo E" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105 hidden lg:block">
+
                     </div>
                 </div>
 
@@ -305,12 +318,12 @@
                         <p class="text-gray-700 italic">"FR Design Studio did an exceptional job with our 2 BHK interiors, turning every corner into something beautiful and practical. They blended modern design with smart space planning, making our home feel bigger and more welcoming. The quality of materials, finishing, and their professionalism throughout the project truly impressed us—we’re thrilled with our new home!"</p>
                     </div>
                     <!-- Photo slide for the third review -->
-                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4">
                         <img onclick="showLightbox(this.src, this.alt)" src="assets/customer3/1000042755.jpg" alt="Project 3 Photo A" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
                         <img onclick="showLightbox(this.src, this.alt)" src="assets/customer3/1000042756.jpg" alt="Project 3 Photo B" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
                         <img onclick="showLightbox(this.src, this.alt)" src="assets/customer3/1000042762.jpg" alt="Project 3 Photo C" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
                         <img onclick="showLightbox(this.src, this.alt)" src="assets/customer3/1000042781.jpg" alt="Project 3 Photo D" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
-                        <img onclick="showLightbox(this.src, this.alt)" src="https://placehold.co/400x400/A0A0A0/FFFFFF?text=To be added" alt="Project 3 Photo E" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105 hidden lg:block">
+                        
                     </div>
                 </div>
 
@@ -347,18 +360,62 @@
                             </div>
                         </div>
                        
-                        <p></p>
+                        <p class="text-gray-700 italic">FR Design Studio designed our huge gym with a perfect blend of style and functionality, and the lighting setup is simply outstanding. The well-planned illumination enhances the workout atmosphere, We’re extremely satisfied with the design quality and attention to detail.</p>
                     </div>
                     <!-- Photo slide for the fifth review -->
-                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4">
                         <img onclick="showLightbox(this.src, this.alt)" src="assets/customer5/1000014608.jpg" alt="Project 5 Photo A" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
                         <img onclick="showLightbox(this.src, this.alt)" src="assets/customer5/1000014614.jpg" alt="Project 5 Photo B" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
                         <img onclick="showLightbox(this.src, this.alt)" src="assets/customer5/1000014617.jpg" alt="Project 5 Photo C" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
                         <img onclick="showLightbox(this.src, this.alt)" src="assets/customer5/1000014620.jpg" alt="Project 5 Photo D" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
-                        <img onclick="showLightbox(this.src, this.alt)" src="assets/customer5/" alt="Project 5 Photo E" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105 hidden lg:block">
+
+                    </div>
+                </div>
+                <!-- Client Review 6 with Photo Slideand review video-->
+                <div class="mb-16">
+                    <div class="bg-white p-8 rounded-lg shadow-xl mb-8">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <img src="https://placehold.co/60x60/F1F5F9/1F2937?text=IM" alt="profile picture" class="rounded-full">
+                            <div>
+                                <p class="font-semibold text-lg">Izhar and Madina Bukhari</p>
+                            </div>
+                        </div>
+                       
+                        <p class="text-gray-700 italic">We, the Bukhari Family, would like to thank you for your exceptional creativity, meticulous attention to
+                                                        detail, and unwavering commitment. Thank you once again for exceeding our expectations and making our dream home а reality.</p>
+                    </div>
+                    <!-- Photo slide for the fifth review -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                        <img onclick="showLightbox(this.src, this.alt)" src="assets/customer6/1000168427.heic" alt="Project 5 Photo A" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
+                        <img onclick="showLightbox(this.src, this.alt)" src="assets/customer6/1000168437.heic" alt="Project 5 Photo B" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
+                        <img onclick="showLightbox(this.src, this.alt)" src="assets/customer6/1000168438.heic" alt="Project 5 Photo C" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
+                        <img onclick="showLightbox(this.src, this.alt)" src="assets/customer6/1000168441.heic" alt="Project 5 Photo D" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
+                        <img onclick="showLightbox(this.src, this.alt)" src="assets/customer6/1000168447.heic" alt="Project 5 Photo D" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
+                        <img onclick="showLightbox(this.src, this.alt)" src="assets/customer6/1000173321.heic" alt="Project 5 Photo D" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
                     </div>
                 </div>
 
+                <!-- Video Div Updated for Vertical Aspect Ratio (9:16) -->
+                <div id="client-video-review" class="py-16">
+                    <div class="container mx-auto px-4">
+                        <h2 class="text-3xl md:text-4xl font-bold text-center mb-10">Watch Our Latest Client Review</h2>
+                        <!-- Increased max-w for larger video display -->
+                        <div class="max-w-2xl mx-auto rounded-xl shadow-2xl overflow-hidden bg-gray-200">
+                             <!-- The custom aspect-4-3 class sets the correct ratio (3/4 = 75%) -->
+                            <div class="aspect-4-3">
+                                <video 
+                                    class="w-full h-full object-cover" 
+                                    src="assets/customer6/review.mp4" 
+                                    title="Client Video Review" 
+                                    controls
+                                    autoplay
+                                    muted
+                                ></video>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Video Div -->
                
             </section>
 
