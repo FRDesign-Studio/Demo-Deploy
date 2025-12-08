@@ -12,9 +12,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
 
         body {
             font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s, color 0.3s; /* Smooth transition for theme change */
         }
 
         /* Custom styles for the video overlay */
@@ -65,7 +68,7 @@
             transform: translate(-50%, -50%);
             z-index: 1000;
             background-color: white;
-            color: #1A2430;
+            color: #1A2430; /* Ensure text is dark in the modal for contrast */
             padding: 2rem;
             border-radius: 0.5rem;
             box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
@@ -155,6 +158,66 @@
             width: 100%;
             height: 100%;
         }
+        /* Custom aspect ratio for the review video (4:3) */
+         .aspect-4-3 {
+            padding-bottom: 75%; /* (3 / 4) * 100% */
+            position: relative;
+        }
+        .aspect-4-3 > video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+
+        /* --- DARK MODE STYLES --- */
+        body.dark-mode {
+            background-color: #1a1a1a; /* Very dark gray/black background */
+            color: #e0e0e0; /* Light gray text for readability */
+        }
+
+        /* Overriding light section backgrounds */
+        body.dark-mode .bg-gray-50, 
+        body.dark-mode .bg-gray-100 {
+            background-color: #1a1a1a !important; 
+        }
+
+        /* Overriding white component backgrounds (cards, reviews) */
+        body.dark-mode .bg-white {
+            background-color: #2c2c2c !important; /* Slightly lighter dark background for contrast */
+            color: #f0f0f0;
+        }
+
+        /* Adjusting text colors that were explicitly dark */
+        body.dark-mode .text-gray-800 {
+            color: #f0f0f0 !important;
+        }
+        body.dark-mode .text-gray-700 {
+            color: #cccccc !important;
+        }
+        body.dark-mode .text-gray-600 {
+            color: #aaaaaa !important;
+        }
+
+        /* Ensure link/button colors stand out */
+        body.dark-mode .text-blue-600 {
+            color: #60a5fa !important; /* Lighter blue for dark theme */
+        }
+
+        /* Adjusting the custom modal colors for dark theme */
+        body.dark-mode #custom-modal {
+             background-color: #4a4a4a;
+             color: #f0f0f0;
+        }
+        
+        /* About Page Header Icons */
+        body.dark-mode .about-header-icon {
+            color: #f0f0f0 !important;
+        }
+
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -182,7 +245,6 @@
                 <video
                     class="absolute top-1/2 left-1/2 min-w-full min-h-full w-auto h-auto -translate-x-1/2 -translate-y-1/2"
                     src="https://pplqbef2jp4gywne.public.blob.vercel-storage.com/firstVideo.mp4"
-
                     autoplay
                     muted
                     loop
@@ -191,32 +253,30 @@
                 
 
                 <div class="video-overlay">
-                    <!-- Logo in the top-left, also acts as a Home button -->
-                    <div class="absolute top-4 left-4 z-20">
-                         <button onclick="showPage('home-page')" class="p-1 rounded-full hover:bg-white hover:bg-opacity-20 transition duration-300">
+                    <!-- Top Navigation Bar -->
+                    <div class="absolute top-4 left-0 right-0 p-4 flex items-center justify-between z-20">
+                        <!-- Logo in the top-left, also acts as a Home button -->
+                        <button onclick="showPage('home-page')" class="p-1 rounded-full hover:bg-white hover:bg-opacity-20 transition duration-300">
                             <img src="assets/Logo.png" alt="FR Designs Logo" class="w-12 h-12 rounded-full">
                         </button>
+                        
+                        <!-- Right side: Dark Mode Toggle and About Link -->
+                        <div class="flex items-center space-x-4">
+                            <!-- Dark Mode Toggle Button (White icon on hero video) -->
+                            <button id="dark-mode-toggle" onclick="toggleDarkMode()" class="text-white hover:text-blue-300 transition duration-300 p-2 rounded-full">
+                                <i class="fas fa-moon text-xl"></i>
+                            </button>
+                            <!-- About Link -->
+                            <a href="#" onclick="showPage('about-page'); return false;" class="text-white font-black text-2xl hover:text-blue-300 transition duration-300">
+                                About
+                            </a>
+                        </div>
                     </div>
-                    
-                    <!-- About hyperlink in the top-right -->
-                    <div class="absolute top-4 right-4 z-20">
-                       <!--  <a href="#" onclick="showPage('about-page'); return false;" class="text-white font-bold text-6xl hover:text-blue-300 transition duration-300"></a>
-                            About
-                        </a> -->
-                        <a href="#" onclick="showPage('about-page'); return false;" class="text-white font-black text-2xl hover:text-blue-300 transition duration-300">
-                            About
-                        </a>
-                    </div>
-                    
-                    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
                     
                     <h1 class="text-xl md:text-2xl font-bold mb-4 font-montserrat">FR Design Studio</h1>
                     <p class="text-3xl md:text-4xl max-w-2xl px-4 mb-8 font-montserrat">
                        "Where elegance is effortless and art is affordable."
                     </p>
-                   <!--  <button onclick="showPage('projects-page')" class="bg-transparent bg-opacity-20 hover:bg-opacity-30 transition duration-300 text-white font-semibold py-3 px-8 rounded-full shadow-lg border-2 border-white backdrop-blur-sm">
-                        View Projects
-                    </button> -->
                 </div>
             </section>
 
@@ -295,8 +355,10 @@
                                                         detail, and unwavering commitment. Thank you once again for exceeding our expectations and making our dream home а reality.</p>
                     </div>
                     <!-- Photo slide for the fifth review -->
-                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4">
-                         <img onclick="showLightbox(this.src, this.alt)" src="assets/customer6/1000168438.heic" alt="Project 5 Photo C" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
+                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                        <img onclick="showLightbox(this.src, this.alt)" src="assets/customer6/1000168427.heic" alt="Project 5 Photo A" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
+                        <img onclick="showLightbox(this.src, this.alt)" src="assets/customer6/1000168437.heic" alt="Project 5 Photo B" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
+                        <img onclick="showLightbox(this.src, this.alt)" src="assets/customer6/1000168438.heic" alt="Project 5 Photo C" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
                         <img onclick="showLightbox(this.src, this.alt)" src="assets/customer6/1000168441.heic" alt="Project 5 Photo D" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
                         <img onclick="showLightbox(this.src, this.alt)" src="assets/customer6/1000168447.heic" alt="Project 5 Photo D" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
                         <img onclick="showLightbox(this.src, this.alt)" src="assets/customer6/1000173321.heic" alt="Project 5 Photo D" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
@@ -480,15 +542,22 @@
         <!-- About Page Section -->
         <div id="about-page" class="hidden">
             <!-- Header for About page -->
-            <div class="absolute top-0 left-0 right-0 p-4 flex items-center justify-between z-20">
+            <div class="absolute top-0 left-0 right-0 p-4 flex items-center justify-between z-20 bg-white dark:bg-[#1a1a1a] shadow-md">
                 <!-- Logo button on the left -->
-                <button onclick="showPage('home-page')" class="p-1 rounded-full hover:bg-gray-200 transition duration-300">
+                <button onclick="showPage('home-page')" class="p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition duration-300">
                     <img src="assets/Screenshot 2025-08-04 at 8.49.43 PM.png" alt="FR Designs Logo" class="w-12 h-12 rounded-full">
                 </button>
-                <!-- Home button on the right -->
-                <button onclick="showPage('home-page')" class="text-2xl font-semibold text-gray-800 hover:text-blue-600 transition duration-300">
-                    Home
-                </button>
+                
+                <div class="flex items-center space-x-4">
+                     <!-- Dark Mode Toggle Button (Dark icon on light/dark header) -->
+                    <button id="dark-mode-toggle-about" onclick="toggleDarkMode()" class="text-gray-800 dark:text-white hover:text-blue-600 transition duration-300 p-2 rounded-full about-header-icon">
+                        <i class="fas fa-moon text-xl"></i>
+                    </button>
+                    <!-- Home button on the right -->
+                    <button onclick="showPage('home-page')" class="text-2xl font-semibold text-gray-800 dark:text-white hover:text-blue-600 transition duration-300">
+                        Home
+                    </button>
+                </div>
             </div>
             
             <section class="container mx-auto px-4 py-16 mt-20 slide-in">
@@ -507,12 +576,12 @@
                         <!-- Added Instagram and Phone number links -->
                         <div class="flex flex-col sm:flex-row items-center justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-8 mt-6">
                                 <!-- Instagram Link -->
-                                <a href="https://www.instagram.com/the.fr_design.studio/" target="_blank" class="flex items-center space-x-2 text-gray-700 hover:text-blue-600 transition-colors duration-300">
+                                <a href="https://www.instagram.com/the.fr_design.studio/" target="_blank" class="flex items-center space-x-2 text-gray-700 dark:text-white hover:text-blue-600 transition-colors duration-300">
                                     <i class="fab fa-instagram text-2xl"></i>
                                     <span>The FR Design Studio</span>
                                 </a>
                                 <!-- Phone Number -->
-                                <a href="tel:+919876543210" class="flex items-center space-x-2 text-gray-700 hover:text-blue-600 transition-colors duration-300">
+                                <a href="tel:+919876543210" class="flex items-center space-x-2 text-gray-700 dark:text-white hover:text-blue-600 transition-colors duration-300">
                                     <i class="fas fa-phone text-2xl"></i>
                                     <span>+91 8766537048</span>
                                 </a>
@@ -546,9 +615,6 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const pages = ['home-page', 'projects-page', 'about-page'];
-            const homePage = document.getElementById('home-page');
-            const projectsPage = document.getElementById('projects-page');
-            const aboutPage = document.getElementById('about-page');
             const customModal = document.getElementById('custom-modal');
             const modalMessage = document.getElementById('modal-message');
             const modalCloseBtn = document.getElementById('modal-close-btn');
@@ -610,6 +676,42 @@
                     lightboxImage.alt = '';
                 }, 300); // Wait for the fade-out transition to complete
             };
+
+            // Function to toggle dark mode
+            window.toggleDarkMode = function() {
+                const isDarkMode = document.body.classList.toggle('dark-mode');
+                localStorage.setItem('darkMode', isDarkMode ? 'enabled' : 'disabled');
+                updateDarkModeIcons(isDarkMode);
+            };
+
+            // Function to update the icon based on the mode
+            function updateDarkModeIcons(isDarkMode) {
+                const homeToggle = document.getElementById('dark-mode-toggle');
+                const aboutToggle = document.getElementById('dark-mode-toggle-about');
+                
+                // Use a moon icon for light mode (click to go to dark) and a sun icon for dark mode (click to go to light)
+                const iconClass = isDarkMode ? 'fas fa-sun' : 'fas fa-moon';
+                
+                // Update the icon on the home page (if visible/exists)
+                if (homeToggle) {
+                    homeToggle.querySelector('i').className = iconClass;
+                }
+                // Update the icon on the about page (if visible/exists)
+                if (aboutToggle) {
+                    aboutToggle.querySelector('i').className = iconClass;
+                }
+            }
+
+            // Check for saved dark mode preference on load
+            const savedTheme = localStorage.getItem('darkMode');
+            if (savedTheme === 'enabled') {
+                document.body.classList.add('dark-mode');
+                updateDarkModeIcons(true);
+            } else {
+                // Explicitly set to light mode/moon icon if no preference or disabled
+                updateDarkModeIcons(false);
+            }
+
 
             // Initial page load
             showPage('home-page');
