@@ -254,7 +254,56 @@
             </section>
 
             <section id="reviews" class="bg-gray-100 container mx-auto px-4 py-16">
+
+                <!-- Client Review 6 video-->
+
+                <!-- Video Div Updated for Vertical Aspect Ratio (9:16) -->
+                <div id="client-video-review" class="py-16">
+                    <div class="container mx-auto px-4">
+                        <h2 class="text-3xl md:text-4xl font-bold text-center mb-10">Watch Our Latest Client Review</h2>
+                        <!-- Increased max-w for larger video display -->
+                        <div class="max-w-2xl mx-auto rounded-xl shadow-2xl overflow-hidden bg-gray-200">
+                             <!-- The custom aspect-4-3 class sets the correct ratio (3/4 = 75%) -->
+                            <div class="aspect-4-3">
+                                <video 
+                                    class="w-full h-full object-cover" 
+                                    src="https://pplqbef2jp4gywne.public.blob.vercel-storage.com/review.mp4" 
+                                    title="Client Video Review" 
+                                    controls
+                                    autoplay
+                                    muted
+                                ></video>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
                 <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Client Reviews</h2>
+                <!-- Client Review 6 with Photo Slide -->
+                <div class="mb-16">
+                    <div class="bg-white p-8 rounded-lg shadow-xl mb-8">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <img src="https://placehold.co/60x60/F1F5F9/1F2937?text=IM" alt="profile picture" class="rounded-full">
+                            <div>
+                                <p class="font-semibold text-lg">Izhar and Madina Bukhari</p>
+                            </div>
+                        </div>
+                       
+                        <p class="text-gray-700 italic">We, the Bukhari Family, would like to thank you for your exceptional creativity, meticulous attention to
+                                                        detail, and unwavering commitment. Thank you once again for exceeding our expectations and making our dream home а reality.</p>
+                    </div>
+                    <!-- Photo slide for the fifth review -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                        <img onclick="showLightbox(this.src, this.alt)" src="assets/customer6/1000168427.heic" alt="Project 5 Photo A" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
+                        <img onclick="showLightbox(this.src, this.alt)" src="assets/customer6/1000168437.heic" alt="Project 5 Photo B" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
+                        <img onclick="showLightbox(this.src, this.alt)" src="assets/customer6/1000168438.heic" alt="Project 5 Photo C" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
+                        <img onclick="showLightbox(this.src, this.alt)" src="assets/customer6/1000168441.heic" alt="Project 5 Photo D" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
+                        <img onclick="showLightbox(this.src, this.alt)" src="assets/customer6/1000168447.heic" alt="Project 5 Photo D" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
+                        <img onclick="showLightbox(this.src, this.alt)" src="assets/customer6/1000173321.heic" alt="Project 5 Photo D" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
+                    </div>
+                </div>
 
                 <!-- Client Review 1 with Photo Slide -->
                 <div class="mb-16">
@@ -374,49 +423,9 @@
                     </div>
                 </div>
                 <!-- Client Review 6 with Photo Slideand review video-->
-                <div class="mb-16">
-                    <div class="bg-white p-8 rounded-lg shadow-xl mb-8">
-                        <div class="flex items-center space-x-4 mb-4">
-                            <img src="https://placehold.co/60x60/F1F5F9/1F2937?text=IM" alt="profile picture" class="rounded-full">
-                            <div>
-                                <p class="font-semibold text-lg">Izhar and Madina Bukhari</p>
-                            </div>
-                        </div>
-                       
-                        <p class="text-gray-700 italic">We, the Bukhari Family, would like to thank you for your exceptional creativity, meticulous attention to
-                                                        detail, and unwavering commitment. Thank you once again for exceeding our expectations and making our dream home а reality.</p>
-                    </div>
-                    <!-- Photo slide for the fifth review -->
-                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                        <img onclick="showLightbox(this.src, this.alt)" src="assets/customer6/1000168427.heic" alt="Project 5 Photo A" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
-                        <img onclick="showLightbox(this.src, this.alt)" src="assets/customer6/1000168437.heic" alt="Project 5 Photo B" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
-                        <img onclick="showLightbox(this.src, this.alt)" src="assets/customer6/1000168438.heic" alt="Project 5 Photo C" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
-                        <img onclick="showLightbox(this.src, this.alt)" src="assets/customer6/1000168441.heic" alt="Project 5 Photo D" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
-                        <img onclick="showLightbox(this.src, this.alt)" src="assets/customer6/1000168447.heic" alt="Project 5 Photo D" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
-                        <img onclick="showLightbox(this.src, this.alt)" src="assets/customer6/1000173321.heic" alt="Project 5 Photo D" class="w-full h-auto rounded-lg shadow-md cursor-pointer transition-transform duration-300 transform hover:scale-105">
-                    </div>
-                </div>
+                
 
-                <!-- Video Div Updated for Vertical Aspect Ratio (9:16) -->
-                <div id="client-video-review" class="py-16">
-                    <div class="container mx-auto px-4">
-                        <h2 class="text-3xl md:text-4xl font-bold text-center mb-10">Watch Our Latest Client Review</h2>
-                        <!-- Increased max-w for larger video display -->
-                        <div class="max-w-2xl mx-auto rounded-xl shadow-2xl overflow-hidden bg-gray-200">
-                             <!-- The custom aspect-4-3 class sets the correct ratio (3/4 = 75%) -->
-                            <div class="aspect-4-3">
-                                <video 
-                                    class="w-full h-full object-cover" 
-                                    src="https://pplqbef2jp4gywne.public.blob.vercel-storage.com/review.mp4" 
-                                    title="Client Video Review" 
-                                    controls
-                                    autoplay
-                                    muted
-                                ></video>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
                 <!-- End Video Div -->
                
             </section>
